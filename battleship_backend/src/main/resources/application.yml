@@ -1,17 +1,19 @@
 spring:
   cloud:
+    function:
+      definition: join_request;board_set_request;move_request
     stream:
       default-binder: solace_cloud
       bindings:
-        join_request:
+        join_request-in-0:
           destination: JOIN-REQUESTS
           group: SOLACE-BATTLESHIP
           binder: solace_cloud
-        board_set_request:
+        board_set_request-in-0:
           destination: BOARD-SET-REQUESTS
           group: SOLACE-BATTLESHIP
           binder: solace_cloud
-        move_request:
+        move_request-in-0:
           destination: MOVE-REQUESTS
           group: SOLACE-BATTLESHIP
           binder: solace_cloud
@@ -26,15 +28,15 @@ spring:
                 reconnectRetries: 3
       solace:
         bindings:
-          join_request:
+          join_request-in-0:
             consumer:
               #Subscription for the join request queue
               queueAdditionalSubscriptions: SOLACE/BATTLESHIP/*/JOIN-REQUEST/*
-          board_set_request:
+          board_set_request-in-0:
             consumer:
               #Subscription for the board set request queue
               queueAdditionalSubscriptions: SOLACE/BATTLESHIP/*/BOARD-SET-REQUEST/*
-          move_request:
+          move_request-in-0:
             consumer:
               #Subscription for the move request queue
               queueAdditionalSubscriptions: SOLACE/BATTLESHIP/*/MOVE-REQUEST/*
